@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="3.0">
+	<name>Albums Package</name>
+	<author>Bruno Batista</author>
+	<creationDate>January 2013</creationDate>
+	<copyright>Copyright (C) 2013 AtomTech, Inc. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>bruno@atomtech.com.br</authorEmail>
+	<authorUrl>http://www.atomtech.com.br</authorUrl>
+	<packagename>albums</packagename>
+	<version>3.0.0</version>
+	<url>http://www.atomtech.com.br</url>
+	<packager>Bruno Batista</packager>
+	<packagerurl>http://www.atomtech.com.br</packagerurl>
+	<description>Albums package to combine multiple extensions.</description>
+	<update>http://www.atomtech.com.br/update</update>
+	<files folder="packages">
+		<file type="component" id="com_albums">com_albums</file>
+	</files>
+</extension>
