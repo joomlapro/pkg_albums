@@ -45,10 +45,9 @@
 			-->
 			<menu link="option=com_albums" view="cpanel" img="class:cpanel" alt="Albums/Cpanel">com_albums_cpanel</menu>
 			<menu link="option=com_albums&amp;view=albums" view="albums" img="class:albums" alt="Albums/Albums">com_albums_albums</menu>
-			<menu link="option=com_albums&amp;view=partners" view="partners" img="class:partners" alt="Albums/Partners">com_albums_partners</menu>
-			<menu link="option=com_albums&amp;view=schedules" view="schedules" img="class:schedules" alt="Albums/Schedules">com_albums_schedules</menu>
+			<menu link="option=com_albums&amp;view=places" view="places" img="class:places" alt="Albums/Places">com_albums_places</menu>
 			<menu link="option=com_categories&amp;extension=com_albums" view="categories" img="class:category" alt="Albums/Categories">com_albums_categories</menu>
-			<menu link="option=com_categories&amp;extension=com_albums.partners" view="categories" img="class:category" alt="Albums/Categories Partners">com_albums_categories_partners</menu>
+			<menu link="option=com_categories&amp;extension=com_albums.places" view="categories" img="class:category" alt="Albums/Categories Places">com_albums_categories_places</menu>
 		</submenu>
 		<files folder="admin">
 			<filename>access.xml</filename>

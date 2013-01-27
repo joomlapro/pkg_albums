@@ -48,9 +48,9 @@ class AlbumsHelper
 		);
 
 		JHtmlSidebar::addEntry(
-			JText::_('COM_ALBUMS_SUBMENU_CATEGORIES_PARTNERS'),
-			'index.php?option=com_categories&extension=com_albums.partners',
-			$vName == 'categories.partners'
+			JText::_('COM_ALBUMS_SUBMENU_CATEGORIES_PLACES'),
+			'index.php?option=com_categories&extension=com_albums.places',
+			$vName == 'categories.places'
 		);
 
 		if ($vName == 'categories')

@@ -19,10 +19,9 @@ $user = JFactory::getUser();
 				<li class="nav-header"><?php echo JText::_('COM_ALBUMS_HEADER_SUBMENU'); ?></li>
 				<li class="active"><a href="<?php echo $this->baseurl; ?>/index.php?option=com_albums"><?php echo JText::_('COM_ALBUMS_LINK_DASHBOARD'); ?></a></li>
 				<li><a href="<?php echo $this->baseurl; ?>/index.php?option=com_albums&amp;view=albums"><?php echo JText::_('COM_ALBUMS_LINK_ALBUMS'); ?></a></li>
-				<li><a href="<?php echo $this->baseurl; ?>/index.php?option=com_albums&amp;view=partners"><?php echo JText::_('COM_ALBUMS_LINK_PARTNERS'); ?></a></li>
-				<li><a href="<?php echo $this->baseurl; ?>/index.php?option=com_albums&amp;view=schedules"><?php echo JText::_('COM_ALBUMS_LINK_SCHEDULES'); ?></a></li>
+				<li><a href="<?php echo $this->baseurl; ?>/index.php?option=com_albums&amp;view=places"><?php echo JText::_('COM_ALBUMS_LINK_PLACES'); ?></a></li>
 				<li><a href="<?php echo $this->baseurl; ?>/index.php?option=com_categories&amp;extension=com_albums"><?php echo JText::_('COM_ALBUMS_LINK_CATEGORIES'); ?></a></li>
-				<li><a href="<?php echo $this->baseurl; ?>/index.php?option=com_categories&amp;extension=com_albums.partners"><?php echo JText::_('COM_ALBUMS_LINK_CATEGORIES_PARTNERS'); ?></a></li>
+				<li><a href="<?php echo $this->baseurl; ?>/index.php?option=com_categories&amp;extension=com_albums.places"><?php echo JText::_('COM_ALBUMS_LINK_CATEGORIES_PLACES'); ?></a></li>
 			</ul>
 		</div>
 	</div>
