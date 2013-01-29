@@ -16,7 +16,7 @@ defined('JPATH_BASE') or die;
  * @subpackage  com_albums
  * @since       3.0
  */
-class JFormFieldOrdering extends JFormField
+class JFormFieldAlbumOrdering extends JFormField
 {
 	/**
 	 * The form field type.
@@ -24,7 +24,7 @@ class JFormFieldOrdering extends JFormField
 	 * @var     string
 	 * @since   3.0
 	 */
-	protected $type = 'Ordering';
+	protected $type = 'AlbumOrdering';
 
 	/**
 	 * Method to get the field input markup.

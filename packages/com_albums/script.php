@@ -111,15 +111,15 @@ class com_albumsInstallerScript
 	 */
 	public function _addCategory()
 	{
-		// Create categories for our component.
-		$basePath = JPATH_ADMINISTRATOR . '/components/com_categories';
+		// Include dependancies.
+		JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_categories/models', 'CategoriesModel');
+		JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_categories/tables');
 
-		require_once $basePath . '/models/category.php';
+		// Get an instance of the generic category model.
+		$model = JModelLegacy::getInstance('Category', 'CategoriesModel', array('ignore_request' => true));
 
-		$config   = array('table_path' => $basePath . '/tables');
-		$catmodel = new CategoriesModelCategory($config);
-
-		$catData  = array(
+		// Attempt to save the category.
+		$data  = array(
 			'id'          => 0,
 			'parent_id'   => 0,
 			'level'       => 1,
@@ -134,23 +134,37 @@ class com_albumsInstallerScript
 			'language'    => '*'
 		);
 
-		$catmodel->save($catData);
-		$id = $catmodel->getItem()->id;
+		// Save the data.
+		$model->save($data);
 
-		$db = JFactory::getDBO();
+		// Initialiase variables.
+		$id    = $model->getItem()->id;
+		$db    = JFactory::getDBO();
 
 		// Updating all albums without category to have this new one.
 		$query = $db->getQuery(true);
-		$query->update('#__albums');
-		$query->set('catid = ' . (int) $id);
-		$query->where('catid = 0');
+		$query->update($db->quoteName('#__albums'));
+		$query->set($db->quoteName('catid') . ' = ' . $db->quote((int) $id));
+		$query->where($db->quoteName('catid') . ' = ' . $db->quote(0));
 		$db->setQuery($query);
 		$db->query();
 
-		// Updating all places without category to have this new one.
-		// $query->update('#__albums_places');
-		// $query->setQuery($query);
-		// $db->query();
+		$data2 = (array) $data;
+		$data2['extension'] = 'com_albums.places';
+
+		// Save the data.
+		$model->save($data2);
+
+		// Initialiase variables.
+		$id    = $model->getItem()->id;
+
+		// Updating all albums without category to have this new one.
+		$query->clear();
+		$query->update($db->quoteName('#__albums_places'));
+		$query->set($db->quoteName('catid') . ' = ' . $db->quote((int) $id));
+		$query->where($db->quoteName('catid') . ' = ' . $db->quote(0));
+		$db->setQuery($query);
+		$db->query();
 
 		return;
 	}
