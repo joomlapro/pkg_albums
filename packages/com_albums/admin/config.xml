@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+	<fieldset name="component" label="COM_ALBUMS_COMPONENT_LABEL" description="COM_ALBUMS_COMPONENT_DESC" addfieldpath="/administrator/components/com_albums/models/fields">
+		<field name="maxnumberoffiles" type="text" size="40" class="inputbox input-small" default="10" label="COM_ALBUMS_FIELD_MAXNUMBEROFFILES_LABEL" description="COM_ALBUMS_FIELD_MAXNUMBEROFFILES_DESC" />
+		<field name="minfilesize" type="text" size="40" class="inputbox" default="1" label="COM_ALBUMS_FIELD_MINFILESIZE_LABEL" description="COM_ALBUMS_FIELD_MINFILESIZE_DESC" />
+		<field name="maxfilesize" type="text" size="40" class="inputbox" default="8000000" label="COM_ALBUMS_FIELD_MAXFILESIZE_LABEL" description="COM_ALBUMS_FIELD_MAXFILESIZE_DESC" />
+		<field name="previewmaxwidth" type="text" size="40" class="inputbox" default="100" label="COM_ALBUMS_FIELD_PREVIEWMAXWIDTH_LABEL" description="COM_ALBUMS_FIELD_PREVIEWMAXWIDTH_DESC" />
+		<field name="previewMaxHeight" type="text" size="40" class="inputbox" default="100" label="COM_ALBUMS_FIELD_PREVIEWMAXHEIGHT_LABEL" description="COM_ALBUMS_FIELD_PREVIEWMAXHEIGHT_DESC" />
+	</fieldset>
+	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL" description="JCONFIG_PERMISSIONS_DESC">
+		<field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL" filter="rules" validate="rules" component="com_albums" section="component" />
+	</fieldset>
+</config>
