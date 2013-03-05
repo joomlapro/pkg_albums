@@ -10,21 +10,21 @@
 defined('_JEXEC') or die;
 
 /**
- * Albums list controller class.
+ * Images list controller class.
  *
  * @package     Albums
  * @subpackage  com_albums
- * @since       3.0
+ * @since       3.1
  */
-class AlbumsControllerAlbums extends JControllerAdmin
+class AlbumsControllerImages extends JControllerAdmin
 {
 	/**
 	 * The prefix to use with controller messages.
 	 *
 	 * @var     string
-	 * @since   3.0
+	 * @since   3.1
 	 */
-	protected $text_prefix = 'COM_ALBUMS_ALBUMS';
+	protected $text_prefix = 'COM_ALBUMS_IMAGES';
 
 	/**
 	 * Method to get a model object, loading it if required.
@@ -35,9 +35,9 @@ class AlbumsControllerAlbums extends JControllerAdmin
 	 *
 	 * @return  object  The model.
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
-	public function getModel($name = 'Album', $prefix = 'AlbumsModel', $config = array('ignore_request' => true))
+	public function getModel($name = 'Image', $prefix = 'AlbumsModel', $config = array('ignore_request' => true))
 	{
 		$model = parent::getModel($name, $prefix, $config);
 
@@ -49,12 +49,13 @@ class AlbumsControllerAlbums extends JControllerAdmin
 	 *
 	 * @return  void
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	public function saveOrderAjax()
 	{
 		// Get the input.
-		$input = JFactory::getApplication()->input;
+		$app   = JFactory::getApplication();
+		$input = $app->input;
 		$pks   = $input->post->get('cid', array(), 'array');
 		$order = $input->post->get('order', array(), 'array');
 
@@ -74,6 +75,6 @@ class AlbumsControllerAlbums extends JControllerAdmin
 		}
 
 		// Close the application.
-		JFactory::getApplication()->close();
+		$app->close();
 	}
 }

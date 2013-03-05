@@ -10,13 +10,13 @@
 defined('_JEXEC') or die;
 
 /**
- * Methods supporting a list of place records.
+ * Methods supporting a list of image records.
  *
  * @package     Albums
  * @subpackage  com_albums
- * @since       3.0
+ * @since       3.1
  */
-class AlbumsModelPlaces extends JModelList
+class AlbumsModelImages extends JModelList
 {
 	/**
 	 * Constructor.
@@ -24,7 +24,7 @@ class AlbumsModelPlaces extends JModelList
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
 	 * @see     JController
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	public function __construct($config = array())
 	{
@@ -33,18 +33,8 @@ class AlbumsModelPlaces extends JModelList
 			$config['filter_fields'] = array(
 				'id', 'a.id',
 				'name', 'a.name',
-				'alias', 'a.alias',
-				'checked_out', 'a.checked_out',
-				'checked_out_time', 'a.checked_out_time',
-				'catid', 'a.catid', 'category_title',
 				'state', 'a.state',
-				'access', 'a.access', 'access_level',
-				'created', 'a.created',
-				'created_by', 'a.created_by',
 				'ordering', 'a.ordering',
-				'featured', 'a.featured',
-				'language', 'a.language',
-				'hits', 'a.hits',
 			);
 		}
 
@@ -61,7 +51,7 @@ class AlbumsModelPlaces extends JModelList
 	 *
 	 * @return  void
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	protected function populateState($ordering = null, $direction = null)
 	{
@@ -79,17 +69,11 @@ class AlbumsModelPlaces extends JModelList
 		$search = $this->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
 
-		$accessId = $this->getUserStateFromRequest($this->context . '.filter.access', 'filter_access', null, 'int');
-		$this->setState('filter.access', $accessId);
-
 		$published = $this->getUserStateFromRequest($this->context . '.filter.state', 'filter_state', '', 'string');
 		$this->setState('filter.state', $published);
 
-		$categoryId = $this->getUserStateFromRequest($this->context . '.filter.category_id', 'filter_category_id', '');
-		$this->setState('filter.category_id', $categoryId);
-
-		$language = $this->getUserStateFromRequest($this->context . '.filter.language', 'filter_language', '');
-		$this->setState('filter.language', $language);
+		$albumId = $this->getUserStateFromRequest($this->context . '.filter.album_id', 'filter_album_id', '');
+		$this->setState('filter.album_id', $albumId);
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_albums');
@@ -110,16 +94,14 @@ class AlbumsModelPlaces extends JModelList
 	 *
 	 * @return  string  A store id.
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id .= ':' . $this->getState('filter.search');
-		$id .= ':' . $this->getState('filter.access');
 		$id .= ':' . $this->getState('filter.state');
-		$id .= ':' . $this->getState('filter.category_id');
-		$id .= ':' . $this->getState('filter.language');
+		$id .= ':' . $this->getState('filter.album_id');
 
 		return parent::getStoreId($id);
 	}
@@ -129,7 +111,7 @@ class AlbumsModelPlaces extends JModelList
 	 *
 	 * @return  JDatabaseQuery
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	protected function getListQuery()
 	{
@@ -142,40 +124,18 @@ class AlbumsModelPlaces extends JModelList
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.id, a.catid, a.name, a.alias, a.checked_out, a.checked_out_time' .
-				', a.hits' .
-				', a.state, a.access, a.ordering, a.language, a.created'
+				'a.id, a.name' .
+				', a.state, a.ordering'
 			)
 		);
-		$query->from($db->quoteName('#__albums_places') . ' AS a');
+		$query->from($db->quoteName('#__albums_images') . ' AS a');
 
-		// Join over the language.
-		$query->select('l.title AS language_title');
-		$query->join('LEFT', $db->quoteName('#__languages') . ' AS l ON l.lang_code = a.language');
+		// Filter by album.
+		$albumId = $this->getState('filter.album_id');
 
-		// Join over the users for the checked out user.
-		$query->select('uc.name AS editor');
-		$query->join('LEFT', '#__users AS uc ON uc.id = a.checked_out');
-
-		// Join over the asset groups.
-		$query->select('ag.title AS access_level');
-		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
-
-		// Join over the categories.
-		$query->select('c.title AS category_title');
-		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
-
-		// Filter by access level.
-		if ($access = $this->getState('filter.access'))
+		if (is_numeric($albumId))
 		{
-			$query->where('a.access = ' . (int) $access);
-		}
-
-		// Implement View Level Access.
-		if (!$user->authorise('core.admin'))
-		{
-			$groups = implode(', ', $user->getAuthorisedViewLevels());
-			$query->where('a.access IN (' . $groups . ')');
+			$query->where('a.album_id = ' . (int) $albumId);
 		}
 
 		// Filter by published state.
@@ -190,14 +150,6 @@ class AlbumsModelPlaces extends JModelList
 			$query->where('(a.state IN (0, 1))');
 		}
 
-		// Filter by category.
-		$categoryId = $this->getState('filter.category_id');
-
-		if (is_numeric($categoryId))
-		{
-			$query->where('a.catid = ' . (int) $categoryId);
-		}
-
 		// Filter by search in name.
 		$search = $this->getState('filter.search');
 
@@ -210,26 +162,13 @@ class AlbumsModelPlaces extends JModelList
 			else
 			{
 				$search = $db->quote('%' . $db->escape($search, true) . '%');
-				$query->where('(a.name LIKE ' . $search . ' OR a.alias LIKE ' . $search . ')');
+				$query->where('(a.name LIKE ' . $search . ')');
 			}
 		}
 
-		// Filter on the language.
-		if ($language = $this->getState('filter.language'))
-		{
-			$query->where('a.language = ' . $db->quote($language));
-		}
-
 		// Add the list ordering clause.
-		$orderCol  = $this->state->get('list.ordering');
-		$orderDirn = $this->state->get('list.direction');
-
-		if ($orderCol == 'a.ordering' || $orderCol == 'category_title')
-		{
-			$orderCol = 'c.title ' . $orderDirn . ', a.ordering';
-		}
-
-		$query->order($db->escape($orderCol . ' ' . $orderDirn));
+		$orderCol = $this->getState('list.ordering', 'a.name');
+		$query->order($db->escape($orderCol) . ' ' . $db->escape($this->getState('list.direction', 'ASC')));
 
 		// echo nl2br(str_replace('#__', 'jos_', $query));
 

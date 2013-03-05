@@ -12,33 +12,33 @@ defined('JPATH_BASE') or die;
 JFormHelper::loadFieldClass('list');
 
 /**
- * Place Field class for the Albums.
+ * Zoom Field class for the Albums.
  *
  * @package     Albums
  * @subpackage  com_albums
- * @since       3.0
+ * @since       3.1
  */
-class JFormFieldPlace extends JFormFieldList
+class JFormFieldZoom extends JFormFieldList
 {
 	/**
 	 * The form field type.
 	 *
 	 * @var     string
-	 * @since   3.0
+	 * @since   3.1
 	 */
-	protected $type = 'Place';
+	protected $type = 'Zoom';
 
 	/**
 	 * Method to get the field options.
 	 *
 	 * @return  array  The field option objects.
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	protected function getOptions()
 	{
 		// Initialiase variables.
-		$options = AlbumsHelper::getPlaceOptions();
+		$options = range(0, 21);
 
 		// Merge any additional options in the XML definition.
 		$options = array_merge(parent::getOptions(), $options);

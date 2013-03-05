@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @package     Albums
  * @subpackage  com_albums
- * @since       3.0
+ * @since       3.1
  */
 class com_albumsInstallerScript
 {
@@ -38,7 +38,7 @@ class com_albumsInstallerScript
 	 *
 	 * @return  boolean  True on success.
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	public function preflight($route, JAdapterInstance $adapter)
 	{
@@ -53,7 +53,7 @@ class com_albumsInstallerScript
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	public function postflight($route, JAdapterInstance $adapter)
 	{
@@ -67,7 +67,7 @@ class com_albumsInstallerScript
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	public function install(JAdapterInstance $adapter)
 	{
@@ -81,7 +81,7 @@ class com_albumsInstallerScript
 	 *
 	 * @return  boolean  True on success.
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	public function update(JAdapterInstance $adapter)
 	{
@@ -95,7 +95,7 @@ class com_albumsInstallerScript
 	 *
 	 * @return  boolean  True on success.
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	public function uninstall(JAdapterInstance $adapter)
 	{
@@ -107,7 +107,7 @@ class com_albumsInstallerScript
 	 *
 	 * @return  integer  Id of the created category.
 	 *
-	 * @since   3.0
+	 * @since   3.1
 	 */
 	public function _addCategory()
 	{
