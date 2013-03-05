@@ -1,0 +1,119 @@
+/* General Styles */
+.albums hr.soften {
+	background-image: -webkit-linear-gradient(left center , transparent, rgba(0, 0, 0, 0.1), transparent);
+	background-image: -moz-linear-gradient(left center , transparent, rgba(0, 0, 0, 0.1), transparent);
+	background-image: -o-linear-gradient(left center , transparent, rgba(0, 0, 0, 0.1), transparent);
+	background-image: -ms-linear-gradient(left center , transparent, rgba(0, 0, 0, 0.1), transparent);
+	background-image: linear-gradient(left center , transparent, rgba(0, 0, 0, 0.1), transparent);
+	border: 0 none;
+	height: 1px;
+	margin: 20px 0;
+}
+
+/* Albums */
+.albums .album {
+	-webkit-box-shadow: 0 1px 2px 0 rgba(180, 180, 180, 0.2);
+	box-shadow: 0 1px 2px 0 rgba(180, 180, 180, 0.2);
+	position: relative;
+}
+
+.albums .album a {
+	text-decoration: none;
+}
+
+.albums .image {
+	border-radius: 4px 4px 0 0;
+}
+
+.albums .album:hover .image {
+	background: #000;
+}
+
+.albums .album:hover .image img {
+	opacity: 0.6;
+
+	-webkit-transition: all 0.2s ease-in-out 0s;
+	-moz-transition: all 0.2s ease-in-out 0s;
+	-o-transition: all 0.2s ease-in-out 0s;
+	-ms-transition: all 0.2s ease-in-out 0s;
+	transition: all 0.2s ease-in-out 0s;
+}
+
+.albums .image img {
+	border-radius: 4px 4px 0 0;
+
+	-webkit-transition: all 0.2s ease-in-out 0s;
+	-moz-transition: all 0.2s ease-in-out 0s;
+	-o-transition: all 0.2s ease-in-out 0s;
+	-ms-transition: all 0.2s ease-in-out 0s;
+	transition: all 0.2s ease-in-out 0s;
+}
+
+.albums .overlay {
+	display: none;
+	position: absolute;
+	background: rgba(0, 0, 0, 0.6);
+	color: #fff;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 50px;
+	font-size: 18px;
+	margin-top: -50px;
+	margin-left: -25px;
+}
+
+.albums .album:hover .overlay {
+	display: block;
+}
+
+.albums .body {
+	border: 1px solid #ddd;
+	padding: 10px;
+	border-radius: 0 0 4px 4px;
+
+	-webkit-transition: all 0.2s ease-in-out 0s;
+	-moz-transition: all 0.2s ease-in-out 0s;
+	-o-transition: all 0.2s ease-in-out 0s;
+	-ms-transition: all 0.2s ease-in-out 0s;
+	transition: all 0.2s ease-in-out 0s;
+}
+
+.albums .album:hover .body {
+	background: #269ccb;
+	border-color: #269ccb;
+
+	-webkit-transition: all 0.2s ease-in-out 0s;
+	-moz-transition: all 0.2s ease-in-out 0s;
+	-o-transition: all 0.2s ease-in-out 0s;
+	-ms-transition: all 0.2s ease-in-out 0s;
+	transition: all 0.2s ease-in-out 0s;
+}
+
+.albums h3 {
+	font-size: 14px;
+	line-height: 22px;
+	color: #555;
+	margin: 0;
+}
+
+.albums .album:hover h3 {
+	color: #fff;
+}
+
+.albums p {
+	font-size: 13px;
+	color: #999;
+	margin-bottom: 0;
+}
+
+.albums .album:hover p {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.albums p.category {
+	margin-bottom: 10px;
+}
