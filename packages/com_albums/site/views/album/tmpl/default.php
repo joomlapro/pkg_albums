@@ -29,7 +29,27 @@ if ($this->params->get('masonry'))
 	JHtml::script('com_albums/jquery.masonry.min.js', false, true);
 	JHtml::script('com_albums/jquery.custom.js', false, true);
 }
+
+// Load JavaScript.
+JHtml::script('com_albums/jquery.prettyPhoto.js', false, true);
+
+// Load Stylesheet.
+JHtml::stylesheet('com_albums/prettyPhoto.css', false, true, false);
 ?>
+<script type="text/javascript">
+	jQuery.noConflict();
+
+	(function ($) {
+		$(function () {
+			// prettyPhoto.
+			$(document).ready(function() {
+				if ($.fn.prettyPhoto) {
+					$("a[rel^=\"prettyPhoto\"]").prettyPhoto();
+				}
+			});
+		});
+	})(jQuery);
+</script>
 <div class="albums album-item<?php echo $this->pageclass_sfx; ?>">
 	<?php if ($this->params->get('show_page_heading', 1)): ?>
 		<div class="page-header">
@@ -76,7 +96,7 @@ if ($this->params->get('masonry'))
 				<li><i class="icon-picture"></i> 561 fotos</li>
 				<li><i class="icon-camera"></i> Fotográfo: Ratts</li>
 			</ul>
-			<a href="#" class="btn btn-info"><i class="icon-play"></i> Slideshow</a>
+			<!-- <a href="#" class="btn btn-info"><i class="icon-play"></i> Slideshow</a> -->
 		</div>
 		<div class="span6">
 			<?php if ($this->item->description): ?>
@@ -93,7 +113,9 @@ if ($this->params->get('masonry'))
 			<?php foreach ($this->images as $item): ?>
 				<div class="box">
 					<div class="thumbnail">
-						<?php echo JHtml::_('image', $item->thumbnail_url, $item->name, null, true); ?>
+						<a href="<?php echo $item->url; ?>" rel="prettyPhoto[gallery1]">
+							<?php echo JHtml::_('image', $item->thumbnail_url, $item->name, null, true); ?>
+						</a>
 					</div>
 				</div>
 			<?php endforeach ?>
