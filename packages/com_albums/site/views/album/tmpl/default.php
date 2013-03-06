@@ -128,7 +128,9 @@ JHtml::stylesheet('com_albums/prettyPhoto.css', false, true, false);
 					<?php foreach ($group as $item): ?>
 						<div class="span3">
 							<div class="thumbnail">
-								<?php echo JHtml::_('image', $item->thumbnail_url, $item->name, null, true); ?>
+								<a href="<?php echo $item->url; ?>" rel="prettyPhoto[gallery1]">
+									<?php echo JHtml::_('image', $item->thumbnail_url, $item->name, null, true); ?>
+								</a>
 							</div>
 						</div>
 					<?php endforeach; ?>
