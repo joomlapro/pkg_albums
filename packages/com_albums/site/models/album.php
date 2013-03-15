@@ -86,6 +86,10 @@ class AlbumsModelAlbum extends JModelItem
 				$query->select($this->getState('item.select', 'a.*'));
 				$query->from($db->quoteName('#__albums') . ' AS a');
 
+				// Join over the images for counting.
+				$query->select('COUNT(i.id) as nimages');
+				$query->join('LEFT', '#__albums_images AS i ON a.id = i.album_id');
+
 				// Join on category table.
 				$query->select('c.title AS category_title, c.alias AS category_alias, c.access AS category_access');
 				$query->join('LEFT', '#__categories AS c on c.id = a.catid');

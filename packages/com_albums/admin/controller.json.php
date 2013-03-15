@@ -37,7 +37,7 @@ class AlbumsController extends JControllerLegacy
 		$app   = JFactory::getApplication();
 		$input = $app->input;
 
-		// Use the correct json mime-type
+		// Use the correct json mime-type.
 		header('Content-Type: application/json');
 
 		$upload = new UploadHelper;

@@ -12,6 +12,9 @@ defined('_JEXEC') or die;
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
+// Load the backend helper.
+require_once JPATH_ADMINISTRATOR . '/components/com_albums/helpers/albums.php';
+
 // Create shortcuts to some parameters.
 $params  = $this->item->params;
 $canEdit = $params->get('access-edit');
@@ -58,7 +61,6 @@ JHtml::stylesheet('com_albums/prettyPhoto.css', false, true, false);
 			</h1>
 		</div>
 	<?php endif; ?>
-
 	<?php if (!$this->print): ?>
 		<?php if ($canEdit || $params->get('show_print_icon', 1) || $params->get('show_email_icon', 1)): ?>
 			<div class="btn-group pull-right">
@@ -82,7 +84,6 @@ JHtml::stylesheet('com_albums/prettyPhoto.css', false, true, false);
 			<?php echo JHtml::_('albumicon.print_screen', $this->item, $params); ?>
 		</div>
 	<?php endif; ?>
-
 	<div class="page-header">
 		<h2>
 			<?php echo $this->escape($this->item->title); ?>
@@ -93,10 +94,24 @@ JHtml::stylesheet('com_albums/prettyPhoto.css', false, true, false);
 		<div class="span6">
 			<h3><?php echo $this->escape($this->item->subtitle); ?></h3>
 			<ul class="unstyled">
-				<li><i class="icon-picture"></i> 561 fotos</li>
-				<li><i class="icon-camera"></i> Fotográfo: Ratts</li>
+				<li><i class="icon-picture"></i> <?php echo $this->escape($this->item->nimages); ?> <?php echo JText::_('COM_ALBUMS_PICTURES'); ?></li>
+				<li><i class="icon-camera"></i> <?php echo JText::_('COM_ALBUMS_PHOTOGRAPHER'); ?>: <?php echo $this->escape($this->item->photographer); ?></li>
+				<?php if ($this->item->place_type == 2): ?>
+					<li><i class="icon-home"></i> <?php echo JText::_('COM_ALBUMS_PLACE'); ?>: <?php echo $this->escape($this->item->place_name); ?></li>
+				<?php endif; ?>
 			</ul>
 			<!-- <a href="#" class="btn btn-info"><i class="icon-play"></i> Slideshow</a> -->
+			<hr>
+			<?php if ($this->item->place_type == 1 && $this->item->place_id): ?>
+				<?php
+				$place = AlbumsHelper::getPlace($this->item->place_id);
+
+				// Add router helpers.
+				$place->slug    = $place->alias ? ($place->id . ':' . $place->alias) : $place->id;
+				$place->catslug = $place->category_alias ? ($place->catid . ':' . $place->category_alias) : $place->catid;
+				?>
+				<a href="<?php echo JRoute::_(AlbumsHelperRoute::getPlaceRoute($place->slug, $place->catslug)); ?>"><?php echo JHtml::_('image', JUri::root() . $place->banner, $place->name, null, true); ?></a>
+			<?php endif; ?>
 		</div>
 		<div class="span6">
 			<?php if ($this->item->description): ?>

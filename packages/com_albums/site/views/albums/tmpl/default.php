@@ -9,6 +9,9 @@
 // No direct access.
 defined('_JEXEC') or die;
 
+// Load the backend helper.
+require_once JPATH_ADMINISTRATOR . '/components/com_albums/helpers/albums.php';
+
 // Load Stylesheet.
 JHtml::stylesheet('com_albums/frontend.css', false, true, false);
 ?>
@@ -29,7 +32,11 @@ JHtml::stylesheet('com_albums/frontend.css', false, true, false);
 					<div class="album">
 						<a href="<?php echo $item->link; ?>">
 							<div class="image">
-								<img src="http://placehold.it/300x200" alt="" title="" />
+								<?php
+								$image = AlbumsHelper::getFirstPicture($item->id, 3);
+
+								echo JHtml::_('image', $image, $item->title, array('title' => 'Hello'), true);
+								?>
 								<div class="overlay">
 									<i class="icon-picture"></i>
 								</div>

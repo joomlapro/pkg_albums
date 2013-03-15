@@ -226,6 +226,10 @@ class AlbumsModelAlbums extends JModelList
 		);
 		$query->from($db->quoteName('#__albums') . ' AS a');
 
+		// Join over the images for counting.
+		$query->select('COUNT(i.id) as nimages');
+		$query->join('LEFT', '#__albums_images AS i ON a.id = i.album_id');
+
 		// Join over the users for the author and modified_by names.
 		$query->select("CASE WHEN a.created_by_alias > ' ' THEN a.created_by_alias ELSE ua.name END AS author");
 		$query->select("ua.email AS author_email");
