@@ -101,8 +101,8 @@ JHtml::stylesheet('com_albums/prettyPhoto.css', false, true, false);
 				<?php endif; ?>
 			</ul>
 			<!-- <a href="#" class="btn btn-info"><i class="icon-play"></i> Slideshow</a> -->
-			<hr>
 			<?php if ($this->item->place_type == 1 && $this->item->place_id): ?>
+				<hr>
 				<?php
 				$place = AlbumsHelper::getPlace($this->item->place_id);
 

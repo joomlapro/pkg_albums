@@ -303,6 +303,8 @@ class AlbumsModelAlbums extends JModelList
 		$orderCol = $this->getState('list.ordering', 'a.ordering');
 		$query->order($db->escape($orderCol) . ' ' . $db->escape($this->getState('list.direction', 'ASC')));
 
+		$query->group('a.id');
+
 		return $query;
 	}
 

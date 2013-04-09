@@ -35,7 +35,14 @@ JHtml::stylesheet('com_albums/frontend.css', false, true, false);
 								<?php
 								$image = AlbumsHelper::getFirstPicture($item->id, 3);
 
-								echo JHtml::_('image', $image, $item->title, array('title' => 'Hello'), true);
+								if ($image)
+								{
+									echo JHtml::_('image', $image, $item->title, array('title' => 'Hello'), true);
+								}
+								else
+								{
+									echo JHtml::_('image', 'com_albums/noimage.png', $item->title, array('title' => 'Hello'), true);
+								}
 								?>
 								<div class="overlay">
 									<i class="icon-picture"></i>

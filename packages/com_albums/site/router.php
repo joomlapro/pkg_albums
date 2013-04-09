@@ -26,7 +26,7 @@ function albumsBuildRoute(& $query)
 	$app      = JFactory::getApplication();
 	$menu     = $app->getMenu();
 	$params   = JComponentHelper::getParams('com_albums');
-	$advanced = $params->get('sef_advanced_link', 1);
+	$advanced = $params->get('sef_advanced_link', 0);
 
 	// We need a menu item. Either the one specified in the query, or the current active one if none specified
 	if (empty($query['Itemid']))
@@ -231,7 +231,7 @@ function albumsParseRoute($segments)
 	$menu     = $app->getMenu();
 	$item     = $menu->getActive();
 	$params   = JComponentHelper::getParams('com_albums');
-	$advanced = $params->get('sef_advanced_link', 1);
+	$advanced = $params->get('sef_advanced_link', 0);
 
 	// Count route segments.
 	$count = count($segments);
